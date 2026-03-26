@@ -65,6 +65,7 @@ async def get_vc_logger_status(chat_id: int) -> bool:
         else:
             vc_logging_status[chat_id] = True
             await save_vc_logger_status(chat_id, True)
+            asyncio.create_task(check_and_monitor_vc(chat_id))
             return True
 
     except Exception as e:
@@ -113,17 +114,6 @@ async def vclogger_command(_, message: Message):
             await message.reply("❌ Invalid argument!")
 
 
-# AUTO ENABLE
-@app.on_message(filters.group & filters.incoming)
-async def auto_enable_vc_logger(_, message: Message):
-    chat_id = message.chat.id
-
-    if chat_id not in vc_logging_status:
-        vc_logging_status[chat_id] = True
-        await save_vc_logger_status(chat_id, True)
-        asyncio.create_task(check_and_monitor_vc(chat_id))
-
-
 async def get_group_call_participants(userbot, peer):
     try:
         full_chat = await userbot.invoke(
@@ -159,11 +149,7 @@ async def monitor_vc_chat(chat_id):
 
     while chat_id in active_vc_chats and await get_vc_logger_status(chat_id):
         try:
-            try:
-                peer = await userbot.resolve_peer(chat_id)
-            except:
-                return
-
+            peer = await userbot.resolve_peer(chat_id)
             participants_list = await get_group_call_participants(userbot, peer)
 
             new_users = set()
@@ -192,7 +178,7 @@ async def monitor_vc_chat(chat_id):
         except Exception as e:
             LOGGER.error(f"Error monitoring VC: {e}")
 
-        await asyncio.sleep(2)
+        await asyncio.sleep(2)  # FAST DETECTION
 
 
 async def check_and_monitor_vc(chat_id):
@@ -222,7 +208,9 @@ async def handle_user_join(chat_id, user_id, userbot):
         ]
 
         msg = random.choice(messages)
+
         sent_msg = await app.send_message(chat_id, msg)
+
         asyncio.create_task(delete_after_delay(sent_msg, 10))
 
     except Exception as e:
@@ -243,7 +231,9 @@ async def handle_user_leave(chat_id, user_id, userbot):
         ]
 
         msg = random.choice(messages)
+
         sent_msg = await app.send_message(chat_id, msg)
+
         asyncio.create_task(delete_after_delay(sent_msg, 10))
 
     except Exception as e:
