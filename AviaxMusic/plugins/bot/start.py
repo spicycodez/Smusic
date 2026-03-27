@@ -119,18 +119,19 @@ async def start_pm(client, message: Message, _):
     UP, CPU, RAM, DISK = await bot_sys_stats()
 
     await message.reply_photo(
-        random.choice(SWAG),
-        caption=_["start_2"].format(
-            message.from_user.mention,
-            app.mention,
-            UP,
-            DISK,
-            CPU,
-            RAM,
-        ),
-        reply_markup=InlineKeyboardMarkup(out),
-        has_spoiler=True,
-    )
+    random.choice(SWAG),
+    caption=_["start_2"].format(
+        message.from_user.mention,
+        app.mention,
+        UP,
+        DISK,
+        CPU,
+        RAM,
+    ),
+    reply_markup=InlineKeyboardMarkup(out),
+    parse_mode=ParseMode.HTML,  # 🔥 THIS LINE FIXES EVERYTHING
+    has_spoiler=True,
+)
 
     if await is_on_off(2):
         await app.send_message(
