@@ -30,7 +30,7 @@ from AviaxMusic.utils.inline import help_pannel, private_panel, start_panel
 from config import BANNED_USERS
 from strings import get_string
 
-SWAG = = [
+SWAG = [
           "https://files.catbox.moe/jf0yqq.jpg",
           "https://files.catbox.moe/7w0ec2.jpg",
           "https://files.catbox.moe/dfj1l8.jpg",
