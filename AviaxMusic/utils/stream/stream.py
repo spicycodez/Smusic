@@ -1,4 +1,5 @@
 import os
+import random
 from random import randint
 from typing import Union
 
@@ -14,6 +15,12 @@ from AviaxMusic.utils.inline import aq_markup, close_markup, stream_markup
 from AviaxMusic.utils.pastebin import AviaxBin
 from AviaxMusic.utils.stream.queue import put_queue, put_queue_index
 from AviaxMusic.utils.thumbnails import gen_thumb
+
+YT_THUMB = [
+    "https://files.catbox.moe/zv7wnv.jpg",
+    "https://files.catbox.moe/hs1s36.jpg",
+    "https://files.catbox.moe/4ihiq9.jpg",
+]
 
 
 async def stream(
@@ -210,7 +217,7 @@ async def stream(
             button = stream_markup(_, chat_id)
             run = await app.send_photo(
                 original_chat_id,
-                photo=config.YOUTUBE_IMG_URL,
+                photo=random.choice(YT_THUMB),
                 caption=_["stream_1"].format(
                     f"https://t.me/{app.username}?start=info_{vidid}",
                     title[:23],
