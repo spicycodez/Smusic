@@ -2,6 +2,7 @@ from pyrogram import filters
 from pyrogram.types import InlineKeyboardMarkup, Message
 
 import config
+import random
 from AviaxMusic import YouTube, app
 from AviaxMusic.core.call import Aviax
 from AviaxMusic.misc import db
@@ -12,6 +13,11 @@ from AviaxMusic.utils.stream.autoclear import auto_clean
 from AviaxMusic.utils.thumbnails import gen_thumb
 from config import BANNED_USERS
 
+YT_THUMB = [
+    "https://files.catbox.moe/zv7wnv.jpg",
+    "https://files.catbox.moe/hs1s36.jpg",
+    "https://files.catbox.moe/4ihiq9.jpg",
+]
 
 @app.on_message(
     filters.command(["skip", "cskip", "next", "cnext"]) & filters.group & ~BANNED_USERS
@@ -156,7 +162,7 @@ async def send_now_playing(message, videoid, title, duration, user, _, chat_id, 
     button = stream_markup(_, chat_id)
     img = await gen_thumb(videoid)
     run = await message.reply_photo(
-        photo=img,
+        photo=random.choice(YT_THUMB),
         caption=_["stream_1"].format(
             f"https://t.me/{app.username}?start=info_{videoid}",
             title[:23],
@@ -164,6 +170,7 @@ async def send_now_playing(message, videoid, title, duration, user, _, chat_id, 
             user,
         ),
         reply_markup=InlineKeyboardMarkup(button),
+        has_spoiler=True,
     )
     db[chat_id][0]["mystic"] = run
     db[chat_id][0]["markup"] = markup_type
