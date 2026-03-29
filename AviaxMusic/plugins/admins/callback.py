@@ -1,4 +1,5 @@
 import asyncio
+import random
 
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
@@ -35,9 +36,16 @@ from config import (
 from strings import get_string
 import config
 
+
 checker = {}
 upvoters = {}
 
+
+YT_THUMB = [
+    "https://files.catbox.moe/zv7wnv.jpg",
+    "https://files.catbox.moe/hs1s36.jpg",
+    "https://files.catbox.moe/4ihiq9.jpg",
+]
 
 @app.on_callback_query(filters.regex("ADMIN") & ~BANNED_USERS)
 @languageCB
@@ -229,7 +237,7 @@ async def del_back_playlist(client, CallbackQuery, _):
             button = stream_markup(_, chat_id)
             img = await gen_thumb(videoid)
             run = await CallbackQuery.message.reply_photo(
-                photo=img,
+                photo=random.choice(YT_THUMB),
                 caption=_["stream_1"].format(
                     f"https://t.me/{app.username}?start=info_{videoid}",
                     title[:23],
@@ -237,6 +245,7 @@ async def del_back_playlist(client, CallbackQuery, _):
                     user,
                 ),
                 reply_markup=InlineKeyboardMarkup(button),
+                has_spoiler=True,
             )
             db[chat_id][0]["mystic"] = run
             db[chat_id][0]["markup"] = "tg"
@@ -265,7 +274,7 @@ async def del_back_playlist(client, CallbackQuery, _):
             button = stream_markup(_, chat_id)
             img = await gen_thumb(videoid)
             run = await CallbackQuery.message.reply_photo(
-                photo=img,
+                photo=random.choice(YT_THUMB),
                 caption=_["stream_1"].format(
                     f"https://t.me/{app.username}?start=info_{videoid}",
                     title[:23],
@@ -273,6 +282,7 @@ async def del_back_playlist(client, CallbackQuery, _):
                     user,
                 ),
                 reply_markup=InlineKeyboardMarkup(button),
+                has_spoiler=True,
             )
             db[chat_id][0]["mystic"] = run
             db[chat_id][0]["markup"] = "stream"
@@ -336,7 +346,7 @@ async def del_back_playlist(client, CallbackQuery, _):
                 button = stream_markup(_, chat_id)
                 img = await gen_thumb(videoid)
                 run = await CallbackQuery.message.reply_photo(
-                    photo=img,
+                    photo=random.choice(YT_THUMB),
                     caption=_["stream_1"].format(
                         f"https://t.me/{app.username}?start=info_{videoid}",
                         title[:23],
@@ -344,6 +354,7 @@ async def del_back_playlist(client, CallbackQuery, _):
                         user,
                     ),
                     reply_markup=InlineKeyboardMarkup(button),
+                    has_spoiler=True,
                 )
                 db[chat_id][0]["mystic"] = run
                 db[chat_id][0]["markup"] = "stream"
