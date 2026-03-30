@@ -1,5 +1,4 @@
 import os
-import random
 from random import randint
 from typing import Union
 
@@ -15,12 +14,6 @@ from AviaxMusic.utils.inline import aq_markup, close_markup, stream_markup
 from AviaxMusic.utils.pastebin import AviaxBin
 from AviaxMusic.utils.stream.queue import put_queue, put_queue_index
 from AviaxMusic.utils.thumbnails import gen_thumb
-
-YT_THUMB = [
-    "https://files.catbox.moe/zv7wnv.jpg",
-    "https://files.catbox.moe/hs1s36.jpg",
-    "https://files.catbox.moe/4ihiq9.jpg",
-]
 
 
 async def stream(
@@ -119,7 +112,7 @@ async def stream(
                 button = stream_markup(_, chat_id)
                 run = await app.send_photo(
                     original_chat_id,
-                    photo=random.choice(YT_THUMB),
+                    photo=img,
                     caption=_["stream_1"].format(
                         f"https://t.me/{app.username}?start=info_{vidid}",
                         title[:23],
@@ -127,7 +120,6 @@ async def stream(
                         user_name,
                     ),
                     reply_markup=InlineKeyboardMarkup(button),
-                    has_spoiler=True,
                 )
                 db[chat_id][0]["mystic"] = run
                 db[chat_id][0]["markup"] = "stream"
@@ -218,7 +210,7 @@ async def stream(
             button = stream_markup(_, chat_id)
             run = await app.send_photo(
                 original_chat_id,
-                photo=random.choice(YT_THUMB),
+                photo=img,
                 caption=_["stream_1"].format(
                     f"https://t.me/{app.username}?start=info_{vidid}",
                     title[:23],
@@ -226,7 +218,6 @@ async def stream(
                     user_name,
                 ),
                 reply_markup=InlineKeyboardMarkup(button),
-                has_spoiler=True,
             )
             db[chat_id][0]["mystic"] = run
             db[chat_id][0]["markup"] = "stream"
@@ -405,7 +396,7 @@ async def stream(
             button = stream_markup(_, chat_id)
             run = await app.send_photo(
                 original_chat_id,
-                photo=random.choice(YT_THUMB),
+                photo=img,
                 caption=_["stream_1"].format(
                     f"https://t.me/{app.username}?start=info_{vidid}",
                     title[:23],
@@ -413,7 +404,6 @@ async def stream(
                     user_name,
                 ),
                 reply_markup=InlineKeyboardMarkup(button),
-                has_spoiler=True,
             )
             db[chat_id][0]["mystic"] = run
             db[chat_id][0]["markup"] = "tg"
