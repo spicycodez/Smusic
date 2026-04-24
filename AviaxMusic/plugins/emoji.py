@@ -1,7 +1,7 @@
 
 from pyrogram import filters, enums
-from OpusV import app
-from OpusV.misc import SUDOERS
+from AviaxMusic import app
+from AviaxMusic.misc import SUDOERS
 
 
 def _extract_custom_emojis(msg):
