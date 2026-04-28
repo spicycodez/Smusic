@@ -33,7 +33,7 @@ HEROKU_API_KEY = getenv("HEROKU_API_KEY")
 #API_URL = getenv("API_URL", 'https://tgapi.xbitcode.com') #youtube song url
 #VIDEO_API_URL = getenv("VIDEO_API_URL", 'https://tgapi.xbitcode.com')
 YT_API_KEY = getenv("YT_API_KEY", None) # youtube song api key, generate free key or buy paid plan from https://console.nexgenbots.xyz
-YTPROXY_URL = getenv("YTPROXY_URL", 'https://shrutibots.site')
+YTPROXY_URL = getenv("YTPROXY_URL", 'https://tgapi.xbitcode.com')
 
 UPSTREAM_REPO = getenv(
     "UPSTREAM_REPO",
