@@ -7,7 +7,7 @@
 # =======================================================
 
 
-from ShiviMusic import app
+from AviaxMusic import app
 
 from pyrogram import filters, enums
 from pyrogram.types import (
