@@ -15,11 +15,14 @@ from config import OWNER_ID
 
 
 async def aexec(code, client, message):
+    namespace = {}
     exec(
-        "async def __aexec(client, message): "
-        + "".join(f"\n {a}" for a in code.split("\n"))
+        "async def __aexec(client, message):"
+        + "".join(f"\n {line}" for line in code.split("\n")),
+        globals(),
+        namespace,
     )
-    return await locals()["__aexec"](client, message)
+    return await namespace["__aexec"](client, message)
 
 
 async def edit_or_reply(msg: Message, **kwargs):
