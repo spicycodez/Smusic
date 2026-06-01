@@ -13,11 +13,11 @@
 from pyrogram import filters
 from pyrogram.types import Message, CallbackQuery
 
-from AviaxMusic import YouTube, app
-from AviaxMusic.core.call import Aviax as Anony
-from AviaxMusic.misc import db, SUDOERS
-from AviaxMusic.utils import AdminRightsCheck, seconds_to_min
-from AviaxMusic.utils.inline import close_markup
+from ShiviMusic import YouTube, app
+from ShiviMusic.core.call import Shivi as Anony
+from ShiviMusic.misc import db, SUDOERS
+from ShiviMusic.utils import AdminRightsCheck, seconds_to_min
+from ShiviMusic.utils.inline import close_markup
 from config import BANNED_USERS
 
 @app.on_message(
