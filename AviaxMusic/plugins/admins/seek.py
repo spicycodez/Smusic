@@ -13,11 +13,11 @@
 from pyrogram import filters
 from pyrogram.types import Message, CallbackQuery
 
-from BadnamMusic import YouTube, app
-from BadnamMusic.core.call import Badnam as Anony
-from BadnamMusic.misc import db, SUDOERS
-from BadnamMusic.utils import AdminRightsCheck, seconds_to_min
-from BadnamMusic.utils.inline import close_markup
+from AviaxMusic import YouTube, app
+from AviaxMusic.core.call import Aviax as Anony
+from AviaxMusic.misc import db, SUDOERS
+from AviaxMusic.utils import AdminRightsCheck, seconds_to_min
+from AviaxMusic.utils.inline import close_markup
 from config import BANNED_USERS
 
 @app.on_message(
